@@ -3,8 +3,7 @@
 #*                        Creating Figure 5 of Manuscript                           
 #*             <Association of KLD with statistical heterogeneity>                                                         
 #*                                                                                                                                                                   
-#* Author: Loukia M. Spineli
-#* Date: October 2024
+#* Date: November 2024
 #*******************************************************************************
 
 

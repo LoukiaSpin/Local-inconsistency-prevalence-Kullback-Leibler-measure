@@ -2,8 +2,7 @@
 #*
 #*                       Creating Supplementary Figure 4                         
 #*                                                                                                                                                                   
-#* Author: Loukia M. Spineli
-#* Date: October 2024
+#* Date: November 2024
 #*******************************************************************************
 
 

@@ -3,8 +3,7 @@
 #*          Apply the node-splitting approach to the analysed database                                                                                                                                            
 #*                       (Use of the 'rnmamod' R package) 
 #*                                                                                                                                                                   
-#* Author: Loukia M. Spineli
-#* Date: October 2024
+#* Date: November 2024
 #*******************************************************************************
 
 

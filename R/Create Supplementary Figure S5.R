@@ -3,8 +3,7 @@
 #*                       Creating Supplementary Figure 5                         
 #*                 <Association of index D with inconsistency>                                                           
 #*                                                                                                                                                                   
-#* Author: Loukia M. Spineli
-#* Date: October 2024
+#* Date: November 2024
 #*******************************************************************************
 
 

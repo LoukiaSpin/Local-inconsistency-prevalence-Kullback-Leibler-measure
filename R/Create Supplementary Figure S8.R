@@ -3,8 +3,7 @@
 #*                       Creating Supplementary Figure 8 
 #*                <Inconsistency versus statistical heterogeneity>                                   
 #*                                                                                                                                                                   
-#* Author: Loukia M. Spineli
-#* Date: October 2024
+#* Date: November 2024
 #*******************************************************************************
 
 

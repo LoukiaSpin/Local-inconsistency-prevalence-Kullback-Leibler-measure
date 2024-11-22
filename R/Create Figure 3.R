@@ -3,8 +3,7 @@
 #*                        Creating Figure 3 of Manuscript                          
 #*                      <Average KLD versus Inconsistency>                                                              
 #*                                                                                                                                                                   
-#* Author: Loukia M. Spineli
-#* Date: October 2024
+#* Date: November 2024
 #*******************************************************************************
 
 

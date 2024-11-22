@@ -2,8 +2,7 @@
 #*
 #*                Checking convergence and results plausibility                                                                                                                                                                       
 #* 
-#* Author: Loukia M. Spineli
-#* Date: October 2024
+#* Date: November 2024
 #*******************************************************************************
 
 

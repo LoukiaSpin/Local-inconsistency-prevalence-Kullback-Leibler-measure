@@ -3,8 +3,7 @@
 #*                       Creating Supplementary Figure 3                         
 #*                <(In)consistent split nodes by split node size>                        
 #*                                                                                                                                                                   
-#* Author: Loukia M. Spineli
-#* Date: October 2024
+#* Date: November 2024
 #*******************************************************************************
 
 

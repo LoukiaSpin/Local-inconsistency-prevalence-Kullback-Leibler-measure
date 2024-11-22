@@ -3,8 +3,7 @@
 #*                        Creating Table 1 of Manuscript                                                                                                                                                
 #*              Descriptive statistics of network characteristics                                                                                           
 #*                                                                                                                                                                   
-#* Author: Loukia M. Spineli
-#* Date: October 2024
+#* Date: November 2024
 #*******************************************************************************
 
 
