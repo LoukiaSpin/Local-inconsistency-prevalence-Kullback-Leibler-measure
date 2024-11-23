@@ -1,7 +1,6 @@
 #*******************************************************************************
 #*
 #*                        Creating Figure 5 of Manuscript                           
-#*             <Association of KLD with statistical heterogeneity>                                                         
 #*                                                                                                                                                                   
 #* Date: November 2024
 #*******************************************************************************
@@ -13,7 +12,7 @@ lapply(list.of.packages, require, character.only = TRUE); rm(list.of.packages)
 
 
 ## Load functions ----
-source("./30_Analysis/Functions/complete analysis results_function.R")
+source("./R/Functions/complete analysis results_function.R")
 
 
 ## Complete analysis results ----
@@ -175,7 +174,7 @@ together_low <-
 
 
 ## Bring together and save Figure 5
-tiff("./30_Analysis/Figure 5.tiff", 
+tiff("./Figures/Figure 5.tiff", 
      height = 22, 
      width = 38, 
      units = "cm", 

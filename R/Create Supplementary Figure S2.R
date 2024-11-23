@@ -12,7 +12,7 @@ lapply(list.of.packages, require, character.only = TRUE); rm(list.of.packages)
 
 
 ## Load functions ----
-source("./30_Analysis/Functions/complete analysis results_function.R")
+source("./R/Functions/complete analysis results_function.R")
 
 
 ## Load analysis database ----
@@ -61,8 +61,6 @@ plot_indir <-
        colour = "Single-study split node") +
   scale_y_continuous(breaks = c(0, 0.5, 1.0, 1.5, 2.0),
                      limits = c(0, 2.0)) +
-  #scale_x_continuous(breaks = c(-4.6, -2.6, 0, 2.6, 4.6),
-  #                   limits = c(-4.6, 6)) +
   ggtitle("Indirect effects") + 
   theme_classic() +
   theme(title = element_text(size = 12, face = "bold"),
@@ -83,8 +81,6 @@ plot_diff <-
        colour = "Single-study split node") +
   scale_y_continuous(breaks = c(0, 0.5, 1.0, 1.5, 2.0),
                      limits = c(0, 2.20)) +
-  #scale_x_continuous(breaks = c(-6, -4, -2, 0, 2, 4, 6),
-  #                   limits = c(-7, 6.6)) +
   ggtitle("Inconsistency") + 
   theme_classic() +
   theme(title = element_text(size = 12, face = "bold"),
@@ -114,8 +110,8 @@ plot_tau <-
         axis.text = element_text(size = 14))
 
 
-## Bring all together and save Figure 1
-tiff("./30_Analysis/Figure S2.tiff", 
+## Bring all together and save Figure S2
+tiff("./Figures/Figure S2.tiff", 
      height = 25, 
      width = 33, 
      units = "cm", 
@@ -130,15 +126,3 @@ ggarrange(plot_dir, plot_indir, plot_diff, plot_tau,
 dev.off()
 
 
-## Distribution of tau 
-# Overall
-summary(data_set$tau_median)
-summary(data_set$tau_sd)
-
-# Single-study split nodes
-summary(subset(data_set, single_study == "Yes")$tau_median)
-summary(subset(data_set, single_study == "Yes")$tau_sd)
-
-# Split nodes with more studies
-summary(subset(data_set, single_study == "No")$tau_median)
-summary(subset(data_set, single_study == "No")$tau_sd)

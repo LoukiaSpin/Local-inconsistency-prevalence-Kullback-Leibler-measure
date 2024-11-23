@@ -1,7 +1,6 @@
 #*******************************************************************************
 #*
 #*                        Creating Figure 3 of Manuscript                          
-#*                      <Average KLD versus Inconsistency>                                                              
 #*                                                                                                                                                                   
 #* Date: November 2024
 #*******************************************************************************
@@ -13,8 +12,8 @@ lapply(list.of.packages, require, character.only = TRUE); rm(list.of.packages)
 
 
 ## Load functions ----
-source("./30_Analysis/Functions/complete analysis results_function.R")
-source("./30_Analysis/Functions/function.collection_function.R")
+source("./R/Functions/complete analysis results_function.R")
+source("./R/Functions/function.collection_function.R")
 
 
 ## Complete analysis results ----
@@ -29,13 +28,11 @@ complete_res$node_conclusion <-
 # Get the parameters of parabola ('diff_mean' against 'kld_value') for *single-study* split nodes
 parabola_res_single <- solve_quadratic_equ(x = subset(complete_res, Freq == 1)$diff_mean,
                                            y = subset(complete_res, Freq == 1)$kld_value,
-                                           #weight = 1/(subset(complete_res, Freq == 1)$diff_sd)^2,
                                            weight = NULL)
 
 # Get the parameters of parabola ('diff_mean' against 'kld_value') for *non-single-study* split nodes
 parabola_res_nonsingle <- solve_quadratic_equ(x = subset(complete_res, Freq > 1)$diff_mean,
                                               y = subset(complete_res, Freq > 1)$kld_value,
-                                              #weight = 1/(subset(complete_res, Freq > 1)$diff_sd)^2
                                               weight = NULL)
 
 # Get normalised diff values to use as weights
@@ -174,9 +171,6 @@ kld_diff_sd_single <-
   scale_y_continuous(breaks = seq(0, 25, 5),
                      limits = c(0, 25),
                      expand = c(0.02, 0.0)) +
-  #scale_x_continuous(breaks = seq(0, 3, 0.5),
-  #                   limits = c(0, 3),
-  #                   expand = c(0.02, 0.0)) +
   guides(fill = guide_legend(override.aes = list(size = 4, shape = 21), order = 1),
          colour = guide_legend(override.aes = list(size = 4, shape = 21), order = 2),
          size = "none") + 
@@ -211,9 +205,6 @@ kld_diff_sd_nonsingle <-
   scale_y_continuous(breaks = seq(0, 50, 10),
                      limits = c(0, 50),
                      expand = c(0.02, 0.0)) +
-  #scale_x_continuous(breaks = seq(0, 2, 0.5),
-  #                   limits = c(0, 2),
-  #                   expand = c(0.02, 0.0)) +
   guides(fill = guide_legend(override.aes = list(size = 4, shape = 21), order = 1),
          colour = guide_legend(override.aes = list(size = 4, shape = 21), order = 2),
          size = "none") + 
@@ -225,8 +216,8 @@ kld_diff_sd_nonsingle <-
         legend.text = element_text(size = 16),
         legend.position = "bottom")
 
-
-tiff("./30_Analysis/Figure 3.tiff", 
+# Bring together and save Figure 3
+tiff("./Figures/Figure 3.tiff", 
      height = 25, 
      width = 45, 
      units = "cm", 
@@ -239,20 +230,10 @@ ggarrange(kld_diff_single, kld_diff_nonsingle, kld_diff_sd_single, kld_diff_sd_n
 dev.off()
 
 
-## Summary of average KLD: D >= 0.64
-# Split nodes with one study
-summary(complete_res_single$diff_mean[complete_res_single$kld_value >= 0.64])
-length(which(complete_res_single$diff_mean[complete_res_single$kld_value >= 0.64] >= 0)) # 47% (55/116)
-
-# Split nodes with more studies
-summary(complete_res_more$diff_mean[complete_res_more$kld_value >= 0.64])
-length(which(complete_res_more$diff_mean[complete_res_more$kld_value >= 0.64] >= 0)) # 56% (67/120)
-
-
 ## Summary of average KLD: D < 0.64
-# Split nodes with one study
-summary(complete_res_single$diff_mean[complete_res_single$kld_value < 0.64])
-
 # Split nodes with more studies
 summary(complete_res_more$diff_mean[complete_res_more$kld_value < 0.64])
+
+# Split nodes with one study
+summary(complete_res_single$diff_mean[complete_res_single$kld_value < 0.64])
 

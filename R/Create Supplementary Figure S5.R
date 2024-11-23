@@ -1,7 +1,6 @@
 #*******************************************************************************
 #*
 #*                       Creating Supplementary Figure 5                         
-#*                 <Association of index D with inconsistency>                                                           
 #*                                                                                                                                                                   
 #* Date: November 2024
 #*******************************************************************************
@@ -13,7 +12,7 @@ lapply(list.of.packages, require, character.only = TRUE); rm(list.of.packages)
 
 
 ## Load functions ----
-source("./30_Analysis/Functions/complete analysis results_function.R")
+source("./R/Functions/complete analysis results_function.R")
 
 
 ## Complete analysis results ----
@@ -159,7 +158,7 @@ together_incon_mat <-
 
 
 ## Bring together and save Figure S5
-tiff("./30_Analysis/Figure S5.tiff", 
+tiff("./Figures/Figure S5.tiff", 
      height = 22, 
      width = 38, 
      units = "cm", 
@@ -170,15 +169,12 @@ ggarrange(together_incon_mat, together_incon_low,
           ncol = 2,
           common.legend = TRUE,
           legend = "none")
-#plot <- ggarrange(together_incon_mat, together_incon_low, 
-#          labels = c("A)", "B)"),
-#          ncol = 2,
-#          common.legend = TRUE,
-#          legend = "none")
-#annotate_figure(plot, 
-#                top = text_grob(paste0("Restricting to ", num_nodes, " (", perc_nodes, "%) split nodes with acceptably low inconsistency"), 
-#                                color = "black", 
-#                                face = "bold", 
-#                                size = 14)) #hjust = 0, vjust = 0.4, x = 0
 dev.off()
 
+
+## Summarise posterior mean of inconsistency based on split node with D >=0.64
+# Split nodes with more studies
+summary(subset(complete_res_mat, single_study == "No")$diff_mean)
+
+# Single-studies split nodes
+summary(subset(complete_res_mat, single_study == "Yes")$diff_mean)

@@ -12,7 +12,7 @@ lapply(list.of.packages, require, character.only = TRUE); rm(list.of.packages)
 
 
 ## Load functions ----
-source("./30_Analysis/Functions/complete analysis results_function.R")
+source("./R/Functions/complete analysis results_function.R")
 
 
 ## Complete analysis results ----
@@ -71,12 +71,9 @@ summary_sd <- melt(as.data.frame(summary_sd0))
 (dist_single_nodes <- 
     table(factor(ifelse(subset(restrict_dataset, estimate == "Direct effect")$study_num == 1, "Yes", "No"), levels = c("Yes", "No"))))
 
-# Percentages
-#(get_perc <- round(prop.table(dist_single_nodes) * 100, 0))
 
-
-## Box plots with integrated dots on the distribution of IF, direct and indirect estimates, considering the number of studies
-# Posterior mean of parameter
+## Box plots with integrated dots on the distribution of IF, direct and indirect estimates by split node group
+# Posterior mean of parameters
 plot_mean <- 
   ggplot(restrict_dataset,
          aes(x = factor(estimate, levels = c("Inconsistency", "Direct effect", "Indirect effect")),
@@ -157,7 +154,7 @@ plot_mean <-
         legend.text = element_text(size = 14), 
         legend.title = element_text(size = 14, face = "bold"))
 
-# Posterior SD of parameter
+# Posterior SD of parameters
 plot_sd <- 
   ggplot(restrict_dataset,
          aes(x = factor(estimate, levels = c("Inconsistency", "Direct effect", "Indirect effect")),
@@ -244,7 +241,7 @@ plot_sd <-
 
 
 ## Bring together
-tiff("./30_Analysis/Figure 1.tiff", 
+tiff("./Figures/Figure 1.tiff", 
      height = 25, 
      width = 45, 
      units = "cm", 
@@ -255,4 +252,3 @@ ggarrange(plot_mean, plot_sd,
           common.legend = TRUE,
           legend = "bottom")
 dev.off()
-

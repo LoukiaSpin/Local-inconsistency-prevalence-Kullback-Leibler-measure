@@ -12,7 +12,7 @@ lapply(list.of.packages, require, character.only = TRUE); rm(list.of.packages)
 
 
 ## Load functions ----
-source("./30_Analysis/Functions/complete analysis results_function.R")
+source("./R/Functions/complete analysis results_function.R")
 
 
 ## Complete analysis results ----
@@ -143,7 +143,6 @@ barplot_net_5 <-
   labs(x = "Inconsistency based on p-value",
        y = "Percentage networks (%)",
        fill = "Inconsistency based on index") +
-  #ggtitle("Significance level at 0.05") +
   scale_fill_manual(values = c("#009E73", "#D55E00")) +
   scale_y_continuous(labels = scales::label_percent(suffix = " ")) +
   theme_classic() +
@@ -174,7 +173,6 @@ barplot_net_10 <-
   labs(x = "Inconsistency based on p-value",
        y = " ",
        fill = "Inconsistency based on index") +
-  #ggtitle("Significance level at 0.10") +
   scale_fill_manual(values = c("#009E73", "#D55E00")) +
   scale_y_continuous(labels = scales::label_percent(suffix = " ")) +
   theme_classic() +
@@ -186,7 +184,7 @@ barplot_net_10 <-
         legend.title = element_text(size = 14, face = "bold"))
 
 # Bring together and save Figure 2
-tiff("./30_Analysis/Figure 2.tiff", 
+tiff("./Figures/Figure 2.tiff", 
      height = 22, 
      width = 38, 
      units = "cm", 

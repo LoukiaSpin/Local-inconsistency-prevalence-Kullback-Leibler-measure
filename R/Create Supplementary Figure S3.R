@@ -1,7 +1,6 @@
 #*******************************************************************************
 #*
 #*                       Creating Supplementary Figure 3                         
-#*                <(In)consistent split nodes by split node size>                        
 #*                                                                                                                                                                   
 #* Date: November 2024
 #*******************************************************************************
@@ -13,7 +12,7 @@ lapply(list.of.packages, require, character.only = TRUE); rm(list.of.packages)
 
 
 ## Load functions ----
-source("./30_Analysis/Functions/complete analysis results_function.R")
+source("./R/Functions/complete analysis results_function.R")
 
 
 ## Complete analysis results ----
@@ -109,7 +108,7 @@ barplot_node_10 <-
         legend.title = element_text(size = 14, face = "bold"))
 
 # Bring together and save Figure S3
-tiff("./30_Analysis/Figure S3.tiff", 
+tiff("./Figures/Figure S3.tiff", 
      height = 18, 
      width = 38, 
      units = "cm", 

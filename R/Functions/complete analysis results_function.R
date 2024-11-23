@@ -11,19 +11,19 @@ complete_analysis_results <- function() {
   
   
   ## Load functions ----
-  source("./30_Analysis/Functions/function.collection_function.R")
-  source("./30_Analysis/Functions/convert_wide_to_pairwise_function.R")
+  source("./R/Functions/function.collection_function.R")
+  source("./R/Functions/convert_wide_to_pairwise_function.R")
   
   
   ## Load analysis database ----
   # List of analysis (final) datasets
-  load("./31_Database/Analysed database/dataset final.RData")
+  load("./data/Analysis datasets/dataset final.RData")
   
   # Data-frame with characteristics of the (final) datasets
-  load("./31_Database/Analysed database/nmalist final.RData")
+  load("./data/Analysis datasets/nmalist final.RData")
   
   # List of node-splitting results
-  load("./30_Analysis/Node-splitting results.RData")
+  load("./data/Node-splitting results.RData")
   
   
   ## Sort in decreasing order the treatments within study  (where applicable)
@@ -150,13 +150,6 @@ complete_analysis_results <- function() {
   
   # Add an indicator on whether a node is informed by a single study only
   complete_res$single_study <- factor(ifelse(complete_res$Freq == 1, "Yes", "No"), levels = c("Yes", "No"))
-  
-  # Add an indication on whether the posterior mean of (in)direct effects is plausible
-  #complete_res$implausible = ifelse((complete_res$direct_mean > -log(5) & complete_res$direct_mean < log(5)) & 
-  #                                    (complete_res$indirect_mean > -log(5) & complete_res$indirect_mean < log(5)), "No", "Yes")
-  
-  # Keep only the split nodes with implausible == "No"
-  #complete_res_fin <- subset(complete_res, implausible == "No")
   
   # Return a message on the number of final, eligible networks and split nodes
   message(paste(length(unique(complete_res$network_id)), "networks and", dim(complete_res)[1], "split nodes were included in the analysis."))

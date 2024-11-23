@@ -7,16 +7,16 @@
 
 
 ## Load function ----
-source("./30_Analysis/Functions/function.collection_function.R")
-source("./30_Analysis/Functions/complete analysis results_function.R")
+source("./R/Functions/function.collection_function.R")
+source("./R/Functions/complete analysis results_function.R")
 
 
 ## Load analysis database ----
 # List of analysis (final) datasets
-load("./31_Database/Analysed database/dataset final.RData")
+load("./data/Analysis datasets/dataset final.RData")
 
 # Results from node-splitting model
-load(file = "./30_Analysis/Node-splitting results.RData")
+load(file = "./data/Node-splitting results.RData")
 
 
 ## Complete analysis results ----
@@ -48,7 +48,7 @@ restrict <- subset(complete_res, kld_value > 15)
 # Unique networks
 restrict_net <- as.numeric(unique(restrict$network_id))
 
-# Get network plot
+# Get network plots
 par(mfrow = c(2, 2))
 rnmamod::netplot(dataset_final[[3]], edge_label_cex = 1, node_label_cex = 1.5)
 rnmamod::netplot(dataset_final[[5]], edge_label_cex = 1, node_label_cex = 1.5)

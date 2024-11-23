@@ -7,12 +7,12 @@
 
 
 ## Load libraries ----
-list.of.packages <- c("reshape2", "ggplot2", "ggpubr")
+list.of.packages <- c("reshape2", "ggplot2")
 lapply(list.of.packages, require, character.only = TRUE); rm(list.of.packages)
 
 
 ## Load functions ----
-source("./30_Analysis/Functions/complete analysis results_function.R")
+source("./R/Functions/complete analysis results_function.R")
 
 
 ## Complete analysis results ----
@@ -20,7 +20,7 @@ complete_res <- complete_analysis_results()
 
 
 ## Add descriptive statistics to the plots
-# Summarise per group
+# Summarise per group (remove outlying split node)
 summary_group0 <- 
   subset(complete_res, kld_value < 40)[, c("kld_value", "single_study")] %>%
   group_by(single_study) %>%
@@ -34,8 +34,8 @@ summary_group0 <-
 summary_group <- melt(as.data.frame(summary_group0))
 
 
-## Get the violin plot with integrated box plot and save Figure S4
-tiff("./30_Analysis/Figure S4.tiff", 
+## Get the violin plot with integrated box plot and dots and save Figure S4
+tiff("./Figures/Figure S4.tiff", 
      height = 18, 
      width = 38, 
      units = "cm", 
@@ -119,5 +119,3 @@ ggplot(subset(complete_res, kld_value < 40),
         legend.text = element_text(size = 15),
         legend.position = "bottom")
 dev.off()
-
-

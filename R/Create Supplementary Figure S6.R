@@ -12,8 +12,8 @@ lapply(list.of.packages, require, character.only = TRUE); rm(list.of.packages)
 
 
 ## Load functions ----
-source("./30_Analysis/Functions/complete analysis results_function.R")
-source("./30_Analysis/Functions/bland.altman.plot_function.R")
+source("./R/Functions/complete analysis results_function.R")
+source("./R/Functions/bland.altman.plot_function.R")
 
 
 ## Complete analysis results ----
@@ -184,7 +184,7 @@ together_more <-
 
 
 ## Bring together and save Figure S6
-tiff("./30_Analysis/Figure S6.tiff", 
+tiff("./Figures/Figure S6.tiff", 
      height = 18, 
      width = 38, 
      units = "cm", 
@@ -200,4 +200,3 @@ annotate_figure(plots,
                                 face = "bold", 
                                 size = 14))
 dev.off()
-

@@ -7,12 +7,11 @@
 
 
 ## Load libraries ----
-list.of.packages <- c("rnmamod", "ggpubr")
-lapply(list.of.packages, require, character.only = TRUE); rm(list.of.packages)
+library(rnmamod)
 
 
 ## Load function ----
-source("./30_Analysis/Functions/complete analysis results_function.R")
+source("./R/Functions/complete analysis results_function.R")
 
 
 ## Complete analysis results ----
@@ -20,7 +19,7 @@ complete_res <- complete_analysis_results()
 
 
 ## Prepare dataset for scatter plot
-# Restrict to the split nodes with D < 0.64
+# Restrict to the split nodes with D < 0.64 and fairly high or extreme tau
 complete_res_fin <- subset(complete_res, kld_value < 0.64 & tau_median >= 0.5)
 
 # Keep the necessary columns
@@ -32,7 +31,7 @@ data_set$comparison <-
       FUN = function(x) if (length(x) > 1) paste0(x[1], "(", seq_along(x), ")") else x[1])
 
 # Panel of density plots; save Figure S7
-tiff("./30_Analysis/Figure S7.tiff", 
+tiff("./Figures/Figure S7.tiff", 
      height = 18, 
      width = 38, 
      units = "cm", 

@@ -7,8 +7,8 @@
 
 
 ## Load library ----
-list.of.packages <- c("rnmamod") #, "dplyr"
-lapply(list.of.packages, require, character.only = TRUE); rm(list.of.packages)
+library(rnmamod) 
+
 
 ## Load functions ----
 source("./R/Functions/function.collection_function.R")

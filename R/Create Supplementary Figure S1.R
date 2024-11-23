@@ -57,7 +57,7 @@ p2 <- kld_inconsistency_user(dataset(mean_dir = log(1.50), sd_dir = 0.3,
 
 
 ## Bring all together in a 1x2 panel
-tiff("./30_Analysis/Figure S1.tiff",
+tiff("./Figures/Figure S1.tiff",
      height = 20,
      width = 40,
      units = "cm",

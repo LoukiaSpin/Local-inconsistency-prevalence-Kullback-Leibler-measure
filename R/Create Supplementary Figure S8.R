@@ -1,7 +1,6 @@
 #*******************************************************************************
 #*
 #*                       Creating Supplementary Figure 8 
-#*                <Inconsistency versus statistical heterogeneity>                                   
 #*                                                                                                                                                                   
 #* Date: November 2024
 #*******************************************************************************
@@ -13,7 +12,7 @@ lapply(list.of.packages, require, character.only = TRUE); rm(list.of.packages)
 
 
 ## Load functions ----
-source("./30_Analysis/Functions/complete analysis results_function.R")
+source("./R/Functions/complete analysis results_function.R")
 
 
 ## Complete analysis results ----
@@ -168,7 +167,7 @@ together_incon_mat <-
 
 
 ## Bring together and save Figure S8
-tiff("./30_Analysis/Figure S8.tiff", 
+tiff("./Figures/Figure S8.tiff", 
      height = 22, 
      width = 38, 
      units = "cm", 
