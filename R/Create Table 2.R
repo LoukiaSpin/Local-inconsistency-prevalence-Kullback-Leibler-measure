@@ -1,28 +1,26 @@
 #*******************************************************************************
 #*
 #*                        Creating Table 2 of Manuscript                                                                                                                        
-#*              Descriptive statistics of network characteristics                                                                             
 #*                                                                                                                                                                   
 #* Date: November 2024
 #*******************************************************************************
 
 
 ## Load library ----
-list.of.packages <- c("rnmamod", "dplyr")
+list.of.packages <- c("rnmamod") #, "dplyr"
 lapply(list.of.packages, require, character.only = TRUE); rm(list.of.packages)
 
-
 ## Load functions ----
-source("./30_Analysis/Functions/function.collection_function.R")
-source("./30_Analysis/Functions/convert_wide_to_pairwise_function.R")
+source("./R/Functions/function.collection_function.R")
+source("./R/Functions/convert_wide_to_pairwise_function.R")
 
 
 ## Load analysis database ----
 # List of analysis (final) datasets
-load("./31_Database/Analysed database/dataset final.RData")
+load("./data/Analysis datasets/dataset final.RData")
 
 # Data-frame with characteristics of the (final) datasets
-load("./31_Database/Analysed database/nmalist final.RData") 
+load("./data/Analysis datasets/nmalist final.RData") 
 
 
 ## Sort in decreasing order the treatments within study  (where applicable)

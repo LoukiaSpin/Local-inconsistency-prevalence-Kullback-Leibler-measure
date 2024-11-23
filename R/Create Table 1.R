@@ -1,14 +1,13 @@
 #*******************************************************************************
 #*
 #*                        Creating Table 1 of Manuscript                                                                                                                                                
-#*              Descriptive statistics of network characteristics                                                                                           
 #*                                                                                                                                                                   
 #* Date: November 2024
 #*******************************************************************************
 
 
 ## Load library
-list.of.packages <- c("nmadb", "netmeta", "gemtc") #, "rnmamod"
+list.of.packages <- c("nmadb", "netmeta", "gemtc") 
 lapply(list.of.packages, require, character.only = TRUE); rm(list.of.packages)
 
 
