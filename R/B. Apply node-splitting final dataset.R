@@ -12,11 +12,11 @@ library(rnmamod)
 
 
 ## Load function ----
-source("./30_Analysis/Functions/function.collection_function.R")
+source("./R/Functions/function.collection_function.R")
 
 
 ## Load analysis database ----
-load("./30_Analysis/NMA results.RData")
+load("./data/NMA results.RData")
 
 
 ## Apply RE node-splitting ----
@@ -32,4 +32,4 @@ node_res <-
                                     n_thin = 10)})
 
 # Save results in .RData
-save(node_res, file = "./30_Analysis/Node-splitting results.RData")
+#save(node_res, file = "./Node-splitting results.RData")

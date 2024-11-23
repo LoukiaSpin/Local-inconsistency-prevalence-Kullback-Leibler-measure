@@ -14,10 +14,10 @@ lapply(list.of.packages, require, character.only = TRUE); rm(list.of.packages)
 
 ## Load analysis database ----
 # List of analysis (final) datasets
-load("./31_Database/Analysed database/dataset final.RData")
+load("./data/Analysis datasets/dataset final.RData")
 
 # Data-frame with characteristics of the (final) datasets
-load("./31_Database/Analysed database/nmalist final.RData") 
+load("./data/Analysis datasets/nmalist final.RData") 
 
 
 ## Data-frame with tailored predictive distributions for tau2 ----
@@ -67,5 +67,5 @@ for (i in 1:length(dataset_final)) {
 }
 
 # Save results in .RData
-save(nma_res, file = "./30_Analysis/NMA results.RData")
+#save(nma_res, file = "./NMA results.RData")
 
