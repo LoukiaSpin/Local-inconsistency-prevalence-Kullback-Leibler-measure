@@ -8,21 +8,21 @@
 
 
 ## Load library
-list.of.packages <- c("nmadb", "netmeta", "gemtc", "rnmamod")
+list.of.packages <- c("nmadb", "netmeta", "gemtc") #, "rnmamod"
 lapply(list.of.packages, require, character.only = TRUE); rm(list.of.packages)
 
 
 ## Load functions 
-source("./30_Analysis/Functions/convert_long_to_wide_function.R")
-source("./30_Analysis/Functions/function.collection_function.R")
+source("./R/Functions/convert_long_to_wide_function.R")
+source("./R/Functions/function.collection_function.R")
 
 
 ## Load full database
 # List of datasets
-load("./31_Database/Complete nmadb database/REDcap NMA dataset.RData") # Downloaded from nmadb on 07/10/2024
+load("./data/REDcap NMA dataset.RData") # Downloaded from nmadb on 07/10/2024
 
 # Data-frame with characteristics of the datasets
-load("./31_Database/Complete nmadb database/Data-frame characteristics datasets.RData") 
+load("./data/Data-frame characteristics datasets.RData") 
 
 
               #*************************************************#           
@@ -172,9 +172,9 @@ with_binary_c0 <- lapply(lapply(with_binary_b,
                                function(x) subset(x, (r / n >= 0.15))), # remove studies with at least one arm with risk < 0.15 
                         function(x) x[ave(rep(1, nrow(x)), x$id, FUN = length) > 1, ]) # remove single-arm studies
 
-# Remove studies with at least one arm with risk = 1.00 (convergence and estimation issues due to separation)
+# Remove studies with at least one arm with risk > 0.85 (convergence and estimation issues due to separation)
 with_binary_c <- lapply(lapply(with_binary_c0, 
-                               function(x) subset(x, (r / n <= 0.85))), # remove studies with at least one arm with risk > 10.85
+                               function(x) subset(x, (r / n <= 0.85))), # remove studies with at least one arm with risk > 0.85
                         function(x) x[ave(rep(1, nrow(x)), x$id, FUN = length) > 1, ]) # remove single-arm studies
 
 # Remove networks that lost all studies from the previous step (with_binary_c)
@@ -183,7 +183,7 @@ with_binary <- Filter(function(x) dim(x)[1] > 0, with_binary_c)
 # Number of networks *removed* after step 'with_binary_c'
 length(with_binary_c) - length(with_binary) # 38  
 
-# Number of networks with at least one study with one or more arms with event risk < 5% or = 100%
+# Number of networks with at least one study with one or more arms with event risk < 15% or > 85%
 length(which(unlist(lapply(with_binary_b, function(x) dim(x)[1])) - unlist(lapply(with_binary_c, function(x) dim(x)[1])) > 0))
 
 # Rename the treatments after losing some treatments 
@@ -220,7 +220,7 @@ length(with_binary_d) - length(with_binary_fin0) # 51
                     #*                                    *#
                     #**************************************#
 
-## E) Check network connectivity (ALL CONNECTED!)
+## E) Check network connectivity 
 # First turn into wide format
 binary_wide <- lapply(with_binary_fin0, function(x) pairwise(treat = t, event = r, n = n, studlab = id, data = x))
 
@@ -269,12 +269,7 @@ length(binary_eligible) # 57
 # Rnmamod will resolve any inconsistency in the order of the treatments in each study
 dataset_final <- lapply(binary_eligible, function(x) convert_long_to_wide(x)) 
 
-# Save final dataset
-#save(dataset_final, file = "./31_Database/Analysed database/dataset final.RData")
-
 
 ## H) Match 'Record.ID' in 'nmalist.reduced' with that in the 'dataset_final' (final dataset of networks)
 nmalist_final <- nmalist_with_data[match(names(dataset_final), nmalist_with_data$Record.ID), ]; dim(nmalist_final)
 
-# Save the final data-frame
-#save(nmalist_final, file = "./31_Database/Analysed database/nmalist final.RData")
