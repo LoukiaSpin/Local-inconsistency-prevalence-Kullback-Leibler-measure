@@ -1,7 +1,8 @@
 #*******************************************************************************
 #*
-#*                        Creating Figure 5 of Manuscript                           
-#*                                                                                                                                                                   
+#*                        Creating Figure 5 of Manuscript   
+#*                                                
+#* Author: Loukia Spineli                                                                                                                                                                    
 #* Date: November 2024
 #*******************************************************************************
 
@@ -181,7 +182,7 @@ tiff("./Figures/Figure 5.tiff",
      compression = "lzw", 
      res = 300)
 ggarrange(together_mat, together_low, 
-          labels = c("A)", "B)"),
+          labels = c("a)", "b)"),
           ncol = 2,
           common.legend = TRUE,
           legend = "none")

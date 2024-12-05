@@ -1,7 +1,8 @@
 #*******************************************************************************
 #*
-#*                       Creating Supplementary Figure 3                         
-#*                                                                                                                                                                   
+#*                       Creating Supplementary Figure 3  
+#*                                              
+#* Author: Loukia Spineli                                                                                                                                                                 
 #* Date: November 2024
 #*******************************************************************************
 
@@ -115,7 +116,7 @@ tiff("./Figures/Figure S3.tiff",
      compression = "lzw", 
      res = 300)
 ggarrange(barplot_node_5, barplot_node_10,
-          labels = c("A)", "B)"),
+          labels = c("a)", "b)"),
           ncol = 2,
           common.legend = TRUE,
           legend = "bottom")

@@ -1,7 +1,8 @@
 #*******************************************************************************
 #*
-#*                       Creating Figure 1 of Manuscript             
-#*                                                                                                                                                                   
+#*                       Creating Figure 1 of Manuscript  
+#*                                  
+#* Author: Loukia Spineli                                                                                                                                                                 
 #* Date: November 2024
 #*******************************************************************************
 
@@ -248,7 +249,7 @@ tiff("./Figures/Figure 1.tiff",
      compression = "lzw", 
      res = 300)
 ggarrange(plot_mean, plot_sd,
-          labels = c("A)", "B)"),
+          labels = c("a)", "b)"),
           common.legend = TRUE,
           legend = "bottom")
 dev.off()

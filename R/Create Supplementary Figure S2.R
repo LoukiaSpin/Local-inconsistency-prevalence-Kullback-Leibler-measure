@@ -2,6 +2,7 @@
 #*
 #*                       Creating Supplementary Figure S2                                                                                                                                                                                   
 #* 
+#* Author: Loukia Spineli  
 #* Date: November 2024
 #*******************************************************************************
 
@@ -118,11 +119,10 @@ tiff("./Figures/Figure S2.tiff",
      compression = "lzw", 
      res = 300)
 ggarrange(plot_dir, plot_indir, plot_diff, plot_tau,
-          labels = c("A)", "B)", "C)", "D)"),
+          labels = c("a)", "b)", "c)", "d)"),
           nrow = 2,
           ncol = 2,
           legend = "bottom",
           common.legend = TRUE)
 dev.off()
-
 

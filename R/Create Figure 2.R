@@ -1,7 +1,8 @@
 #*******************************************************************************
 #*
-#*                       Creating Figure 2 of Manuscript                    
-#*                                                                                                                                                                   
+#*                       Creating Figure 2 of Manuscript     
+#*                                      
+#* Author: Loukia Spineli                                                                                                                                                                  
 #* Date: November 2024
 #*******************************************************************************
 
@@ -191,7 +192,7 @@ tiff("./Figures/Figure 2.tiff",
      compression = "lzw", 
      res = 300)
 ggarrange(barplot_node_5, barplot_node_10, barplot_net_5, barplot_net_10,
-          labels = c("A)", "B)"),
+          labels = c("a)", "b)"),
           nrow = 2,
           ncol = 2,
           common.legend = TRUE,

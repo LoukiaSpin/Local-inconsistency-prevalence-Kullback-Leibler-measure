@@ -1,7 +1,8 @@
 #*******************************************************************************
 #*
-#*                        Creating Figure 3 of Manuscript                          
-#*                                                                                                                                                                   
+#*                        Creating Figure 3 of Manuscript  
+#*                                                
+#* Author: Loukia Spineli                                                                                                                                                                   
 #* Date: November 2024
 #*******************************************************************************
 
@@ -224,7 +225,7 @@ tiff("./Figures/Figure 3.tiff",
      compression = "lzw", 
      res = 300)
 ggarrange(kld_diff_single, kld_diff_nonsingle, kld_diff_sd_single, kld_diff_sd_nonsingle,
-          labels = c("A)", "B)", "C)", "D)"),
+          labels = c("a)", "b)", "c)", "d)"),
           legend = "bottom",
           common.legend = TRUE)
 dev.off()

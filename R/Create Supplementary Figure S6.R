@@ -1,7 +1,8 @@
 #*******************************************************************************
 #*
-#*                       Creating Supplementary Figure 6                                                                                                                 
-#*                                                                                                                                                                   
+#*                       Creating Supplementary Figure 6  
+#*                                                                                                                                      
+#* Author: Loukia Spineli                                                                                                                                                                 
 #* Date: November 2024
 #*******************************************************************************
 
@@ -191,7 +192,7 @@ tiff("./Figures/Figure S6.tiff",
      compression = "lzw", 
      res = 300)
 plots <- ggarrange(together_single, together_more, 
-                   labels = c("A)", "B)"),
+                   labels = c("a)", "b)"),
                    ncol = 2,
                    legend = "none")
 annotate_figure(plots, 

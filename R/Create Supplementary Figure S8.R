@@ -1,7 +1,8 @@
 #*******************************************************************************
 #*
 #*                       Creating Supplementary Figure 8 
-#*                                                                                                                                                                   
+#*                       
+#* Author: Loukia Spineli                                                                                                                                                                  
 #* Date: November 2024
 #*******************************************************************************
 
@@ -174,7 +175,7 @@ tiff("./Figures/Figure S8.tiff",
      compression = "lzw", 
      res = 300)
 ggarrange(together_incon_mat, together_incon_low, 
-          labels = c("A)", "B)"),
+          labels = c("a)", "b)"),
           ncol = 2,
           common.legend = TRUE,
           legend = "none")

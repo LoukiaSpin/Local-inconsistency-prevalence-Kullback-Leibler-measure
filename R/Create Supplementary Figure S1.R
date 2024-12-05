@@ -1,7 +1,8 @@
 #*******************************************************************************
 #*
-#*                       Creating Supplementary Figure S1                                       
-#*                                                                                                                                                                   
+#*                       Creating Supplementary Figure S1      
+#*                                                        
+#* Author: Loukia Spineli                                                                                                                                                                  
 #* Date: November 2024
 #*******************************************************************************
 
@@ -65,7 +66,7 @@ tiff("./Figures/Figure S1.tiff",
      res = 300)
 ggarrange(p1, p2,
           ncol = 2, nrow = 1,
-          labels = c("A)", "B)"),
+          labels = c("a)", "b)"),
           font.label = list(size = 12, color = "black", face = "bold", family = NULL),
           common.legend = TRUE,
           legend = "bottom")

@@ -1,7 +1,8 @@
 #*******************************************************************************
 #*
-#*                       Creating Figure 4 of Manuscript                                                                                             
-#*                                                                                                                                                                   
+#*                       Creating Figure 4 of Manuscript    
+#*                                                                                                                
+#* Author: Loukia Spineli                                                                                                                                                                   
 #* Date: November 2024
 #*******************************************************************************
 
@@ -182,7 +183,7 @@ tiff("./Figures/Figure 4.tiff",
      compression = "lzw", 
      res = 300)
 ggarrange(together_single, together_more, 
-          labels = c("A)", "B)"),
+          labels = c("a)", "b)"),
           ncol = 2,
           legend = "none")
 dev.off()
