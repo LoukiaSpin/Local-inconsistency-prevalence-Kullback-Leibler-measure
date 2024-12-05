@@ -66,6 +66,9 @@ plot_tau_mat <-
   scale_x_continuous(breaks = c(0, 0.3, 0.6, 0.9, 1.2),
                      labels = c(0, 0.3, 0.6, 0.9, 1.2),
                      limits = c(0, 1.2)) +
+  scale_y_continuous(breaks = c(0.64, 10, 20, 30, 40, 50),
+                     labels = c(0.64, 10, 20, 30, 40, 50),
+                     limits = c(0.64, 50)) +
   theme_bw() +
   theme(plot.title = element_text(size = 14, face = "bold"),
         axis.title = element_text(size = 14, face = "bold"),
