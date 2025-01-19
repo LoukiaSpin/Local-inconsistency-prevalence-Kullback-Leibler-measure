@@ -113,26 +113,24 @@ complete_analysis_results <- function() {
                         # Posterior SD of inconsistency factor estimate per split node
                         index_res0[[x]]$diff_sd <- node_res[[x]]$diff[, "sd"];
                         
+                        # Posterior 2.5% percentile of inconsistency factor estimate per split node
+                        index_res0[[x]]$diff_lower <- node_res[[x]]$diff[, "2.5%"];
+                        
+                        # Posterior 97.5% percentile of inconsistency factor estimate per split node
+                        index_res0[[x]]$diff_upper <- node_res[[x]]$diff[, "97.5%"];
+                        
                         # Posterior median between-study standard deviation per split node
                         index_res0[[x]]$tau_median <- node_res[[x]]$tau[, "50%"];
                         
                         # Posterior SD of between-study standard deviation per split node
                         index_res0[[x]]$tau_sd <- node_res[[x]]$tau[, "sd"];
                         
-                        # Two-sided Bayesian p-value for 'diff'
-                        index_res0[[x]]$p_value <- node_res[[x]]$p_value[, "p_value"]; 
+                        # Conclusion per *node* using 95% CrI for 'diff' 
+                        index_res0[[x]]$node_standard <- ifelse (index_res0[[x]][, "diff_lower"] > 0 | 
+                                                                   index_res0[[x]][, "diff_upper"] < 0, "Conclusive", "Inconclusive"); 
                         
-                        # Conclusion per *node* using p-value for 'diff' and significance level at 5%
-                        index_res0[[x]]$node_standard_5 <- ifelse (index_res0[[x]][, "p_value"] < 0.05, "Conclusive", "Inconclusive"); 
-                        
-                        # Conclusion per *node* using p-value for 'diff' and significance level at 10%
-                        index_res0[[x]]$node_standard_10 <- ifelse (index_res0[[x]][, "p_value"] < 0.10, "Conclusive", "Inconclusive"); 
-                        
-                        # Conclusion per *network* using p-value for 'diff' and significance level at 5%
-                        index_res0[[x]]$net_standard_5 <- if (any(index_res0[[x]][, "p_value"] >= 0.05)) "Inconclusive" else "Conclusive"; 
-                        
-                        # Conclusion per *network* using p-value for 'diff' and significance level at 10%
-                        index_res0[[x]]$net_standard_10 <- if (any(index_res0[[x]][, "p_value"] >= 0.10)) "Inconclusive" else "Conclusive"; index_res0[[x]]})
+                        # Conclusion per *network* using 95% CrI for 'diff' 
+                        index_res0[[x]]$net_standard <- if (any(index_res0[[x]][, "node_standard"] == "Conclusive")) "Conclusive" else "Inconclusive"; index_res0[[x]]})
   
   # Merge 'index_res' with the number of studies in each split node
   #' Results are correct: complete_res0, index_res and match_compar_with_node were compared for some randomly selected networks
@@ -150,6 +148,9 @@ complete_analysis_results <- function() {
   
   # Add an indicator on whether a node is informed by a single study only
   complete_res$single_study <- factor(ifelse(complete_res$Freq == 1, "Yes", "No"), levels = c("Yes", "No"))
+  
+  # Export to as xlsx
+  #writexl::write_xlsx(complete_res, path = "Complete_results.xlsx")
   
   # Return a message on the number of final, eligible networks and split nodes
   message(paste(length(unique(complete_res$network_id)), "networks and", dim(complete_res)[1], "split nodes were included in the analysis."))

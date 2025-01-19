@@ -31,7 +31,7 @@ restrict_dataset_sd <- melt(complete_res[, c("direct_sd", "indirect_sd", "diff_s
 restrict_dataset <- cbind(restrict_dataset_mean, restrict_dataset_sd[, 2])
 
 # Rename the estimate type
-restrict_dataset$variable <- rep(c("Direct effect", "Indirect effect", "Inconsistency"), each = dim(complete_res)[1])
+restrict_dataset$variable <- rep(c("Direct effect", "Indirect effect", "Inconsistency factor"), each = dim(complete_res)[1])
 
 # Add the network ID and repeat
 restrict_dataset$network_id <- rep(complete_res$network_id, 3)
@@ -77,7 +77,7 @@ summary_sd <- melt(as.data.frame(summary_sd0))
 # Posterior mean of parameters
 plot_mean <- 
   ggplot(restrict_dataset,
-         aes(x = factor(estimate, levels = c("Inconsistency", "Direct effect", "Indirect effect")),
+         aes(x = factor(estimate, levels = c("Inconsistency factor", "Direct effect", "Indirect effect")),
              y = mean,
              colour = factor(ifelse(study_num == 1, "Yes", "No"), levels = c("Yes", "No")))) +
   geom_boxplot(size = 1, 
@@ -88,7 +88,7 @@ plot_mean <-
              size = 1.3,
              alpha = .4) + 
   geom_text(data = subset(summary_mean, variable == "median"),
-            aes(x = factor(estimate, levels = c("Inconsistency", "Direct effect", "Indirect effect")),
+            aes(x = factor(estimate, levels = c("Inconsistency factor", "Direct effect", "Indirect effect")),
                 y = value,
                 group = factor(single_study, levels = c("Yes", "No")),
                 label = paste0("Q2 = ", sprintf("%.2f", value))),
@@ -99,7 +99,7 @@ plot_mean <-
             vjust = -0.15,
             inherit.aes = FALSE) +
   geom_text(data = subset(summary_mean, variable == "first"),
-            aes(x = factor(estimate, levels = c("Inconsistency", "Direct effect", "Indirect effect")),
+            aes(x = factor(estimate, levels = c("Inconsistency factor", "Direct effect", "Indirect effect")),
                 y = value,
                 group = factor(single_study, levels = c("Yes", "No")),
                 label = paste0("Q1 = ", sprintf("%.2f", value))),
@@ -110,7 +110,7 @@ plot_mean <-
             vjust = -0.15,
             inherit.aes = FALSE) +
   geom_text(data = subset(summary_mean, variable == "third"),
-            aes(x = factor(estimate, levels = c("Inconsistency", "Direct effect", "Indirect effect")),
+            aes(x = factor(estimate, levels = c("Inconsistency factor", "Direct effect", "Indirect effect")),
                 y = value,
                 group = factor(single_study, levels = c("Yes", "No")),
                 label = paste0("Q3 = ", sprintf("%.2f", value))),
@@ -121,7 +121,7 @@ plot_mean <-
             vjust = -0.15,
             inherit.aes = FALSE) +
   geom_text(data = subset(summary_mean, variable == "min"),
-            aes(x = factor(estimate, levels = c("Inconsistency", "Direct effect", "Indirect effect")),
+            aes(x = factor(estimate, levels = c("Inconsistency factor", "Direct effect", "Indirect effect")),
                 y = value,
                 group = factor(single_study, levels = c("Yes", "No")),
                 label = paste0("min. = ", sprintf("%.2f", value))),
@@ -132,7 +132,7 @@ plot_mean <-
             vjust = 0.4,
             inherit.aes = FALSE) +
   geom_text(data = subset(summary_mean, variable == "max"),
-            aes(x = factor(estimate, levels = c("Inconsistency", "Direct effect", "Indirect effect")),
+            aes(x = factor(estimate, levels = c("Inconsistency factor", "Direct effect", "Indirect effect")),
                 y = value,
                 group = factor(single_study, levels = c("Yes", "No")),
                 label = paste0("max. = ", sprintf("%.2f", value))),
@@ -158,7 +158,7 @@ plot_mean <-
 # Posterior SD of parameters
 plot_sd <- 
   ggplot(restrict_dataset,
-         aes(x = factor(estimate, levels = c("Inconsistency", "Direct effect", "Indirect effect")),
+         aes(x = factor(estimate, levels = c("Inconsistency factor", "Direct effect", "Indirect effect")),
              y = sd,
              colour = factor(ifelse(study_num == 1, "Yes", "No"), levels = c("Yes", "No")))) +
   geom_boxplot(size = 1, 
@@ -169,7 +169,7 @@ plot_sd <-
              size = 1.3,
              alpha = .4) + 
   geom_text(data = subset(summary_sd, variable == "median"),
-            aes(x = factor(estimate, levels = c("Inconsistency", "Direct effect", "Indirect effect")),
+            aes(x = factor(estimate, levels = c("Inconsistency factor", "Direct effect", "Indirect effect")),
                 y = value,
                 group = factor(single_study, levels = c("Yes", "No")),
                 label = paste0("Q2 = ", sprintf("%.2f", value))),
@@ -180,7 +180,7 @@ plot_sd <-
             vjust = -0.15,
             inherit.aes = FALSE) +
   geom_text(data = subset(summary_sd, variable == "first"),
-            aes(x = factor(estimate, levels = c("Inconsistency", "Direct effect", "Indirect effect")),
+            aes(x = factor(estimate, levels = c("Inconsistency factor", "Direct effect", "Indirect effect")),
                 y = value,
                 group = factor(single_study, levels = c("Yes", "No")),
                 label = paste0("Q1 = ", sprintf("%.2f", value))),
@@ -191,7 +191,7 @@ plot_sd <-
             vjust = -0.15,
             inherit.aes = FALSE) +
   geom_text(data = subset(summary_sd, variable == "third"),
-            aes(x = factor(estimate, levels = c("Inconsistency", "Direct effect", "Indirect effect")),
+            aes(x = factor(estimate, levels = c("Inconsistency factor", "Direct effect", "Indirect effect")),
                 y = value,
                 group = factor(single_study, levels = c("Yes", "No")),
                 label = paste0("Q3 = ", sprintf("%.2f", value))),
@@ -202,7 +202,7 @@ plot_sd <-
             vjust = -0.15,
             inherit.aes = FALSE) +
   geom_text(data = subset(summary_sd, variable == "min"),
-            aes(x = factor(estimate, levels = c("Inconsistency", "Direct effect", "Indirect effect")),
+            aes(x = factor(estimate, levels = c("Inconsistency factor", "Direct effect", "Indirect effect")),
                 y = value,
                 group = factor(single_study, levels = c("Yes", "No")),
                 label = paste0("min. = ", sprintf("%.2f", value))),
@@ -213,7 +213,7 @@ plot_sd <-
             vjust = 0.4,
             inherit.aes = FALSE) +
   geom_text(data = subset(summary_sd, variable == "max"),
-            aes(x = factor(estimate, levels = c("Inconsistency", "Direct effect", "Indirect effect")),
+            aes(x = factor(estimate, levels = c("Inconsistency factor", "Direct effect", "Indirect effect")),
                 y = value,
                 group = factor(single_study, levels = c("Yes", "No")),
                 label = paste0("max. = ", sprintf("%.2f", value))),

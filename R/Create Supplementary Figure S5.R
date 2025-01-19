@@ -47,8 +47,8 @@ plot_incon_low <-
   stat_smooth(method = "lm", 
               se = TRUE) +
   geom_rug() +
-  labs(x = "Posterior mean of inconsistency",
-       y = "Posterior standard deviation of inconsistency",
+  labs(x = "Posterior mean of inconsistency factor",
+       y = "Posterior standard deviation of inconsistency factor",
        colour = "Single-study split node") + 
   scale_color_manual(breaks = c("Yes", "No"),
                      labels = c(paste0("Yes (", get_count_low[1], ")"), paste0("No (", get_count_low[2], ")")), 
@@ -108,8 +108,8 @@ plot_incon_mat <-
   stat_smooth(method = "lm", 
               se = TRUE) +
   geom_rug() +
-  labs(x = "Posterior mean of inconsistency",
-       y = "Posterior standard deviation of inconsistency",
+  labs(x = "Posterior mean of inconsistency factor",
+       y = "Posterior standard deviation of inconsistency factor",
        colour = "Single-study split node") + 
   scale_color_manual(breaks = c("Yes", "No"),
                      labels = c(paste0("Yes (", get_count_mat[1], ")"), paste0("No (", get_count_mat[2], ")")), 

@@ -68,7 +68,7 @@ plot_indir <-
         axis.title = element_text(size = 14, face = "bold"),
         axis.text = element_text(size = 14))
 
-# Scatter plot of posterior SD of *inconsistency* versus mean
+# Scatter plot of posterior SD of *inconsistency factor* versus mean
 plot_diff <- 
   ggplot(data_set,
          aes(x = diff_mean,
@@ -82,7 +82,7 @@ plot_diff <-
        colour = "Single-study split node") +
   scale_y_continuous(breaks = c(0, 0.5, 1.0, 1.5, 2.0),
                      limits = c(0, 2.20)) +
-  ggtitle("Inconsistency") + 
+  ggtitle("Inconsistency factor") + 
   theme_classic() +
   theme(title = element_text(size = 12, face = "bold"),
         axis.title = element_text(size = 14, face = "bold"),

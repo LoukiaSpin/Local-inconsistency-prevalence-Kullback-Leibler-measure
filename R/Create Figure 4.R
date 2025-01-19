@@ -35,10 +35,9 @@ complete_res$kld_indir <- kld_measure(mean_y = complete_res$indirect_mean,
                                       sd_x = complete_res$direct_sd)$kld_y_true
 
 # Dataset for ggplot2
-data_set <- data.frame(kld_value = rep(complete_res$kld_value, 2),
-                       kld_effect = c(complete_res$kld_dir, complete_res$kld_indir),
-                       kld_type = rep(c("Direct effect", "Indirect effect"), each = dim(complete_res)[1]),
-                       single_study = rep(complete_res$single_study, 2))
+data_set <- data.frame(kld_value = complete_res$kld_value, 
+                       kld_diff_DvsI = complete_res$kld_dir - complete_res$kld_indir, # Difference between kld_dir and kld_indir
+                       single_study = complete_res$single_study)
 
 
 ## Split dataset by size of split nodes
@@ -63,18 +62,18 @@ summary(complete_res_more$kld_indir); quantile(complete_res_more$kld_indir, c(0.
 # Scatter plot 
 plot_single <-
   ggplot(subset(data_set, single_study == "Yes"),
-         aes(x = kld_effect,
-             y = kld_value,
-             colour = kld_type)) +
+         aes(x = kld_value,
+             y = kld_diff_DvsI,
+             colour = ifelse(kld_diff_DvsI > 0, "Direct effect", "Indirect effect"))) +
   geom_point(size = 2) +
   geom_abline(intercept = 0,
-              slope = 1) +
+              slope = 0) +
   geom_rug() +
   scale_color_manual(breaks = c("Direct effect", "Indirect effect"),
                      values = c("#61D04F", "blue")) +
-  labs(x = "Kullback-Leibler divergence for approximating",
-       y = expression(bold(paste("Interpretation index ", D^j))),
-       colour = " ") + 
+  labs(x = expression(bold(paste("Interpretation index ", D^j))),
+       y = expression(bold(paste("KLD approximating direct versus indirect effect"))), 
+       colour = "Larger KLD when approximating") + 
   ggtitle(paste0("Split nodes with one study", " (n = ", dim(complete_res_single)[1], ")")) +
   theme_bw() +
   theme(plot.title = element_text(size = 14, face = "bold"),
@@ -87,8 +86,8 @@ plot_single <-
 # Density plot for x-axis
 dens_single1 <- 
   ggplot(subset(data_set, single_study == "Yes"),
-         aes(x = kld_effect,
-             fill = kld_type)) +
+         aes(x = kld_value,
+             fill = ifelse(kld_diff_DvsI > 0, "Direct effect", "Indirect effect"))) +
   geom_density(alpha = 0.4) + 
   scale_fill_manual(breaks = c("Direct effect", "Indirect effect"),
                     values = c("#61D04F", "blue")) +
@@ -98,9 +97,11 @@ dens_single1 <-
 # Density plot for y-axis
 dens_single2 <- 
   ggplot(subset(data_set, single_study == "Yes"),
-         aes(x = kld_value)) +
-  geom_density(alpha = 0.4,
-               fill = "grey") + 
+         aes(x = kld_diff_DvsI,
+             fill = ifelse(kld_diff_DvsI > 0, "Direct effect", "Indirect effect"))) +
+  geom_density(alpha = 0.4) + 
+  scale_fill_manual(breaks = c("Direct effect", "Indirect effect"),
+                    values = c("#61D04F", "blue")) +
   coord_flip() +
   theme_void() + 
   theme(legend.position = "none")
@@ -121,18 +122,18 @@ together_single <-
 # Scatter plot 
 plot_more <-
   ggplot(subset(data_set, single_study == "No"),
-         aes(x = kld_effect,
-             y = kld_value,
-             colour = kld_type)) +
-  geom_point(size = 2) +
+         aes(x = kld_value,
+             y = kld_diff_DvsI,
+             colour = ifelse(kld_diff_DvsI > 0, "Direct effect", "Indirect effect"))) +
+  geom_point(size = 1) +
   geom_abline(intercept = 0,
-              slope = 1) +
+              slope = 0) +
   geom_rug() +
   scale_color_manual(breaks = c("Direct effect", "Indirect effect"),
                      values = c("#61D04F", "blue")) +
-  labs(x = "Kullback-Leibler divergence for approximating",
+  labs(x = expression(bold(paste("Interpretation index ", D^j))),
        y = " ",
-       colour = " ") + 
+       colour = "Larger KLD when approximating") + 
   ggtitle(paste0("Split nodes with more studies", " (n = ", dim(complete_res_more)[1], ")")) +
   theme_bw() +
   theme(plot.title = element_text(size = 14, face = "bold"),
@@ -145,8 +146,8 @@ plot_more <-
 # Density plot for x-axis
 dens_more1 <- 
   ggplot(subset(data_set, single_study == "No"),
-         aes(x = kld_effect,
-             fill = kld_type)) +
+         aes(x = kld_value,
+             fill = ifelse(kld_diff_DvsI > 0, "Direct effect", "Indirect effect"))) +
   geom_density(alpha = 0.4) + 
   scale_fill_manual(breaks = c("Direct effect", "Indirect effect"),
                     values = c("#61D04F", "blue")) +
@@ -156,9 +157,11 @@ dens_more1 <-
 # Density plot for y-axis
 dens_more2 <- 
   ggplot(subset(data_set, single_study == "No"),
-         aes(x = kld_value)) +
-  geom_density(alpha = 0.4,
-               fill = "grey") + 
+         aes(x = kld_diff_DvsI,
+             fill = ifelse(kld_diff_DvsI > 0, "Direct effect", "Indirect effect"))) +
+  geom_density(alpha = 0.4) + 
+  scale_fill_manual(breaks = c("Direct effect", "Indirect effect"),
+                    values = c("#61D04F", "blue")) +
   coord_flip() +
   theme_void() + 
   theme(legend.position = "none")

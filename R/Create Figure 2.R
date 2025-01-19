@@ -20,28 +20,27 @@ source("./R/Functions/complete analysis results_function.R")
 complete_res <- complete_analysis_results()
 
 
-## Stacked bar plots on (in)consistency conclusion from testing versus proposed index for *split nodes*
+## Stacked bar plots on (in)consistency conclusion from standard approach versus proposed index for *split nodes*
 # Prepare dataset for *split nodes*
-data_barplot_node <- data.frame(node_kld = rep(complete_res$node_conclusion, 2),
-                                node_standard = c(complete_res$node_standard_5, complete_res$node_standard_10),
-                                alpha = rep(c("5%", "10%"), each = dim(complete_res)[1]))
+data_barplot_node <- data.frame(node_kld = complete_res$node_conclusion,
+                                node_standard = complete_res$node_standard)
 
 # Rename the levels of 'node_kld'
 data_barplot_node$node_kld <- 
   revalue(data_barplot_node$node_kld, c("Consistency" = "Acceptably low", "Inconsistency" = "Material"))
 
-# Calculate % conditionally on p-value decision for *split nodes*
+# Calculate % conditionally on standard decision and proposed index for *split nodes*
 conclusion_node <- data_barplot_node %>%
-  dplyr::group_by(node_standard, node_kld, alpha) %>%
+  dplyr::group_by(node_standard, node_kld) %>%
   dplyr::count() %>%
-  dplyr::group_by(node_standard, alpha) %>%
+  dplyr::group_by(node_standard) %>%
   dplyr::mutate(perc = n / sum(n))
 
 
 ## Split nodes with *single* studies
-# Create stacked barplot for *split nodes* (5% significance level) 
-barplot_node_5 <-
-  ggplot(subset(conclusion_node, alpha == "5%"),
+# Create stacked barplot for *split nodes* 
+barplot_node <-
+  ggplot(conclusion_node,
          aes(x = node_standard,
              y = perc,
              fill = node_kld)) +
@@ -56,41 +55,9 @@ barplot_node_5 <-
             size = 4.5,
             position = "stack",
             colour = "white") +
-  labs(x = " ",
+  labs(x = "Inconsistency based on 95% credible interval of inconsistency factor",
        y = "Percentage split nodes (%)",
        fill = "Inconsistency based on index") +
-  ggtitle("Significance level at 0.05") +
-  scale_fill_manual(values = c("#009E73", "#D55E00")) +
-  scale_y_continuous(labels = scales::label_percent(suffix = " ")) +
-  theme_classic() +
-  theme(title = element_text(size = 12, face = "bold"),
-        axis.title = element_text(size = 14, face = "bold"),
-        axis.text = element_text(size = 14),
-        legend.position = "bottom",
-        legend.text = element_text(size = 14),
-        legend.title = element_text(size = 14, face = "bold"))
-
-# Create stacked barplot for *split nodes* (10% significance level)
-barplot_node_10 <-
-  ggplot(subset(conclusion_node, alpha == "10%"),
-         aes(x = node_standard,
-             y = perc,
-             fill = node_kld)) +
-  geom_bar(stat = "identity",
-           position = "fill") +
-  geom_text(aes(x = node_standard,
-                y = perc,
-                group = node_kld,
-                label = ifelse(perc != 0, paste0(round(perc * 100, 0), "% (", n,")"), " ")),
-            hjust = 0.5,
-            vjust = 1.0,
-            size = 4.5,
-            position = "stack",
-            colour = "white") +
-  labs(x = " ",
-       y = " ",
-       fill = "Inconsistency based on index") +
-  ggtitle("Significance level at 0.10") +
   scale_fill_manual(values = c("#009E73", "#D55E00")) +
   scale_y_continuous(labels = scales::label_percent(suffix = " ")) +
   theme_classic() +
@@ -102,12 +69,11 @@ barplot_node_10 <-
         legend.title = element_text(size = 14, face = "bold"))
 
 
-## Stacked bar plots on (in)consistency conclusions from testing versus index for *networks*
+## Stacked bar plots on (in)consistency conclusions from standard approach versus index for *networks*
 # Prepare dataset for *networks*
-data_barplot_net0 <- data.frame(network = rep(complete_res$network_id, 2),
-                                net_kld = rep(complete_res$net_conclusion, 2),
-                                net_standard = c(complete_res$net_standard_5, complete_res$net_standard_10),
-                                alpha = rep(c("5%", "10%"), each = dim(complete_res)[1]))
+data_barplot_net0 <- data.frame(network = complete_res$network_id,
+                                net_kld = complete_res$net_conclusion,
+                                net_standard = complete_res$net_standard)
 
 # Rename the levels of 'net_kld'
 data_barplot_net0$net_kld <- 
@@ -115,18 +81,18 @@ data_barplot_net0$net_kld <-
 
 # Keep one value per network
 data_barplot_net <- data_barplot_net0 %>% 
-  distinct(network, alpha, .keep_all = TRUE)
+  distinct(network, .keep_all = TRUE)
 
-# Calculate % conditionally on p-value decision for *networks*
+# Calculate % conditionally on standard decision for *networks*
 conclusion_net <- data_barplot_net %>%
-  dplyr::group_by(net_standard, net_kld, alpha) %>%
+  dplyr::group_by(net_standard, net_kld) %>%
   dplyr::count() %>%
-  dplyr::group_by(net_standard, alpha) %>%
+  dplyr::group_by(net_standard) %>%
   dplyr::mutate(perc = n / sum(n))
 
-# Create stacked barplot for *networks* (5% significance level) 
-barplot_net_5 <-
-  ggplot(subset(conclusion_net, alpha == "5%"),
+# Create stacked barplot for *networks* 
+barplot_net <-
+  ggplot(conclusion_net, 
          aes(x = net_standard,
              y = perc,
              fill = net_kld)) +
@@ -141,7 +107,7 @@ barplot_net_5 <-
             size = 4.5,
             position = "stack",
             colour = "white") +
-  labs(x = "Inconsistency based on p-value",
+  labs(x = "Inconsistency based on 95% credible interval of inconsistency factor",
        y = "Percentage networks (%)",
        fill = "Inconsistency based on index") +
   scale_fill_manual(values = c("#009E73", "#D55E00")) +
@@ -154,35 +120,6 @@ barplot_net_5 <-
         legend.text = element_text(size = 14),
         legend.title = element_text(size = 14, face = "bold"))
 
-# Create stacked barplot for *networks* (10% significance level) 
-barplot_net_10 <-
-  ggplot(subset(conclusion_net, alpha == "10%"),
-         aes(x = net_standard,
-             y = perc,
-             fill = net_kld)) +
-  geom_bar(stat = "identity",
-           position = "fill") +
-  geom_text(aes(x = net_standard,
-                y = perc,
-                group = net_kld,
-                label = ifelse(perc != 0, paste0(round(perc * 100, 0), "% (", n,")"), " ")),
-            hjust = 0.5,
-            vjust = 1.0,
-            size = 4.5,
-            position = "stack",
-            colour = "white") +
-  labs(x = "Inconsistency based on p-value",
-       y = " ",
-       fill = "Inconsistency based on index") +
-  scale_fill_manual(values = c("#009E73", "#D55E00")) +
-  scale_y_continuous(labels = scales::label_percent(suffix = " ")) +
-  theme_classic() +
-  theme(title = element_text(size = 12, face = "bold"),
-        axis.title = element_text(size = 14, face = "bold"),
-        axis.text = element_text(size = 14),
-        legend.position = "bottom",
-        legend.text = element_text(size = 14),
-        legend.title = element_text(size = 14, face = "bold"))
 
 # Bring together and save Figure 2
 tiff("./Figures/Figure 2.tiff", 
@@ -191,9 +128,8 @@ tiff("./Figures/Figure 2.tiff",
      units = "cm", 
      compression = "lzw", 
      res = 300)
-ggarrange(barplot_node_5, barplot_node_10, barplot_net_5, barplot_net_10,
-          labels = c("a)", "b)"),
-          nrow = 2,
+ggarrange(barplot_node, barplot_net,
+          nrow = 1,
           ncol = 2,
           common.legend = TRUE,
           legend = "bottom")
